@@ -1,17 +1,46 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+
+
+import java.io.*;
+import java.util.Scanner;
+
 public class Main {
-    public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
-
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+    public static void main(String[] args) throws IOException {
+        String nume_fis = "in.txt ";
+        BufferedReader flux_in;
+        flux_in = new BufferedReader(new FileReader(nume_fis));
+        PrintStream flux_out = new PrintStream ("out.txt");
+        String linie;
+        float sum = 0;
+        int n=0;
+        float min=Float.MAX_VALUE;
+        float max=Float.MIN_VALUE;
+        System.out.println("Continutul fisierului:");
+        while ((linie = flux_in.readLine()) != null) {
+            float x = Float.parseFloat(linie);
+            System.out.println(x);
+            if(x>max){
+                max=x;
+            }
+            if(x<min){
+                min=x;
+            }
+            sum = sum + x;
+            n++;
         }
+
+        flux_in.close();
+
+        System.out.println("suma:"+sum);
+        flux_out.println(sum);
+        if(n!=0) {
+            System.out.println("media aritmetica:" + sum / n);
+            flux_out.println(sum / n);
+        }
+        System.out.println("valoarea minima:"+min);
+        flux_out.println(min);
+        System.out.println("valoarea maxima:"+max);
+        flux_out.println(max);
+        flux_out.close();
     }
 }
+
